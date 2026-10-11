@@ -29,7 +29,7 @@ globalThis.fetch = async (input, init) => {
 };
 const measure = () => { const m = { ...wire }; wire.requests = 0; wire.bytes = 0; return m; };
 
-const URL = 'https://data.source.coop/tessera/tessera/zarr/v2-2B-L~beta1/utm30';
+const URL = 'https://s3.us-west-2.amazonaws.com/us-west-2.opendata.source.coop/tessera/tessera/zarr/v2-2B-L~beta1/utm30';
 
 const src = new TesseraSource({ url: URL });
 await src.open();

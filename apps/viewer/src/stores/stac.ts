@@ -19,25 +19,31 @@ export interface DatasetVersion {
   url: string;
 }
 
+/** Root of the published Zarr stores. This is the S3 bucket behind the
+ *  `data.source.coop/tessera/tessera` gateway, read directly: the gateway adds
+ *  a hop to every range request and has been timing out. The bucket name has
+ *  dots, so it must be addressed path-style for TLS to match. */
+const ZARR_ROOT = 'https://s3.us-west-2.amazonaws.com/us-west-2.opendata.source.coop/tessera/tessera/zarr';
+
 /** Known dataset versions, surfaced as presets in the top-bar selector. */
 export const DATASET_VERSIONS: DatasetVersion[] = [
   { id: 'v1.0', label: 'v1.0', sublabel: 'global',
-    url: 'https://data.source.coop/tessera/tessera/zarr/v1' },
+    url: `${ZARR_ROOT}/v1` },
   { id: 'v1.1', label: 'v1.1', sublabel: 'global',
-    url: 'https://data.source.coop/tessera/tessera/zarr/v1.1' },
+    url: `${ZARR_ROOT}/v1.1` },
   // v1.1-dclimate — v1.1 re-exported from the dClimate icechunk store, with
   // per-zone observation-count sidecars. Shortened to "v1.1d" in the UI and in
   // `?store=`; the reader ignores the extra arrays.
   { id: 'v1.1d', label: 'v1.1d', sublabel: 'global · dclimate',
-    url: 'https://data.source.coop/tessera/tessera/zarr/v1.1-dclimate' },
+    url: `${ZARR_ROOT}/v1.1-dclimate` },
   // v2-2B-L~betaN — the 2B-parameter model previews. Shortened to "v2bN" in the
   // UI and in `?store=`; the full release name stays in the URL.
   { id: 'v2b1', label: 'v2b1', sublabel: 'global · beta',
-    url: 'https://data.source.coop/tessera/tessera/zarr/v2-2B-L~beta1' },
+    url: `${ZARR_ROOT}/v2-2B-L~beta1` },
   // beta2 is still uploading — only a handful of UTM zones are present so far,
   // so it is advertised as partial rather than global.
   { id: 'v2b2', label: 'v2b2', sublabel: 'partial · beta',
-    url: 'https://data.source.coop/tessera/tessera/zarr/v2-2B-L~beta2' },
+    url: `${ZARR_ROOT}/v2-2B-L~beta2` },
 ];
 
 /** The dataset loaded when the page URL names none. */
